@@ -1,1 +1,1 @@
-# safari-test
+# strique-test-suite

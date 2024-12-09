@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<suite name="Suite" thread-count="6"><!-- Suite configuration with 5 parallel
+threads -->
+
+  <!-- SafariTest for running on Safari browser -->
+  <test name="SafariTest">
+
+     <parameter name="os" value="Macbook Air"/>
+     <parameter name="browser" value="safari"/>
+      <parameter name="headless" value="true"/>
+
+      <classes>
+        <class name="com.strique.pages.loginpage.SafariLoginTest"/>
+      </classes>
+    </test>
+
+
+</suite> <!-- Suite -->
