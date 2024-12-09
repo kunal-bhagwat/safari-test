@@ -1,34 +1,46 @@
-name: Build Project with Maven and Test Safari
+name: Safari Test Automation
 
 on:
   push:
     branches:
-      - main
+      - main  # or your desired branch
   pull_request:
     branches:
-      - main
+      - main  # or your desired branch
 
 jobs:
-  test-safari:
-    runs-on: macos-latest
-
+  test:
+    runs-on: macos-latest  # macOS container for Safari
     steps:
+      # Check out the code
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up JDK 22
+      # Set up Java (optional, depending on your project)
+      - name: Set up JDK
         uses: actions/setup-java@v2
         with:
           java-version: '22'
-          distribution: 'temurin'
 
-      - name: Set up Maven
-        uses: stCarolas/setup-maven@v5
+      # Enable Safari WebDriver
+      - name: Enable Safari WebDriver
+        run: sudo safaridriver --enable
+
+      # Install dependencies (e.g., Maven, npm, or any other dependencies you might need)
+      - name: Install dependencies
+        run: |
+          # Example for Maven
+          mvn install
+          # Example for npm
+          # npm install
+
+      # Run the tests
+      - name: Run Tests
+        run: mvn test  # Or your specific test command
+
+      # Optionally, save test reports or artifacts
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v2
         with:
-          maven-version: 3.8.2
-
-      - name: Build with Maven
-        run: mvn clean install
-
-      - name: Run Safari Tests
-        run: mvn test -Dbrowser=safari
+          name: test-results
+          path: target/surefire-reports  # Update this with the correct path to your test reports
