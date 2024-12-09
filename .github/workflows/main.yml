@@ -3,10 +3,10 @@ name: Test suits
 on:
   push:
     branches:
-      - test-code-headless-mode
+      - main
   pull_request:
     branches:
-      - test-code-headless-mode
+      - main
 
 jobs:
   build:
